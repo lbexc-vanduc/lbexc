@@ -1,7 +1,5 @@
 #ifndef LBExC__H
 #define LBExC__H
-#include "LBExC_Version.H"
-#include "LBExC_Config.H"
 #include "LBExC_CCSE-MPI.H"
 
 #include <omp.h>
@@ -10,19 +8,18 @@
 #include <functional>
 namespace lbexc
 {
-    class LBExC;
+    // class LBExC;
 
     using PTR_TO_VOID_FUNC = void (*)();
     using ErrorHandler = void (*)(const char*);
 
-    /** the LBExC "git describe" version */
-    [[nodiscard]] std::string Version ();
+    
 
     // The returned LBExC* is non-owning! To delete it, call Finalize(LBExC*).
-    LBExC* Initialize (MPI_Comm mpi_comm,
-                       std::ostream& a_osout = std::cout,
-                       std::ostream& a_oserr = std::cerr,
-                       ErrorHandler a_errhandler = nullptr);
+    // LBExC* Initialize (MPI_Comm mpi_comm,
+    //                    std::ostream& a_osout = std::cout,
+    //                    std::ostream& a_oserr = std::cerr,
+    //                    ErrorHandler a_errhandler = nullptr);
 
     // The returned LBExC* is non-owning! To delete it, call Finalize(LBExC*).
     // LBExC* Initialize (int& argc, char**& argv, bool build_parm_parse=true,
@@ -45,13 +42,13 @@ namespace lbexc
 
 
 
-    class LBExC
-    {
-    public:
-        LBExC(/* args */);
-        ~LBExC();
-        static bool empty () noexcept { return m_instance.empty(); }
-    };
+    // class LBExC
+    // {
+    // public:
+    //     LBExC(/* args */);
+    //     ~LBExC();
+    //     static bool empty () noexcept { return m_instance.empty(); }
+    // };
     
 }
 

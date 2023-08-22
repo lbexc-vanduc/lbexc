@@ -1,6 +1,7 @@
 #ifndef LBExC_PARALLELDESCRIPTOR_H
 #define LBExC_PARALLELDESCRIPTOR_H
 #include <LBExC_Config.H>
+#include <string>
 namespace lbexc {
     //! Used as default argument to ParallelDescriptor::Barrier().
     const std::string Unnamed("Unnamed");
@@ -13,7 +14,7 @@ namespace lbexc {
     //                     char*** argv = nullptr,
     //                     MPI_Comm mpi_comm = MPI_COMM_WORLD);
 
-    void Initialize ();
+    // void Initialize ();
     // void Finalize ();
 
 
