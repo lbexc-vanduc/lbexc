@@ -10,7 +10,7 @@
 LBExC solver is developed by [Van-Duc Nguyen](https://orcid.org/0000-0001-5864-5555)
 
 ## Features
-- C language
+- C++ language
 - Parallelization via hybrid MPI/OpenMP
 - Plotfile format supported by ParaView
   
