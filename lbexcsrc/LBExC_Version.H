@@ -1,6 +1,6 @@
 #ifndef LBExC_Version_H
 #define LBExC_Version_H
-#define LBExC_VERSION "23.08"
+#include "LBExC_Config.H"
 #include <string>
 namespace lbexc
 {

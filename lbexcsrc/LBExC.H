@@ -4,30 +4,26 @@
 
 #include <omp.h>
 #include <iostream>
+#include <memory>
 #include <vector>
+#include <string>
 #include <functional>
 namespace lbexc
 {
     class LBExC;
 
-    using PTR_TO_VOID_FUNC = void (*)();
-    using ErrorHandler = void (*)(const char*);
+    
 
     namespace system
     {
-        extern AMREX_EXPORT std::string exename;
+        extern std::string exename;
 
-        extern AMREX_EXPORT std::ostream* osout;
-        extern AMREX_EXPORT std::ostream* oserr;
-
-        extern AMREX_EXPORT ErrorHandler error_handler;
-        extern AMREX_EXPORT int abort_on_unused_inputs;
+        extern std::ostream* osout;
+        extern std::ostream* oserr;
     }
 
     // The returned LBExC* is non-owning! To delete it, call Finalize(LBExC*).
-    LBExC* Initialize (MPI_Comm mpi_comm,
-                       std::ostream& a_osout = std::cout,
-                       std::ostream& a_oserr = std::cerr);
+    LBExC* Initialize (int  &argc, char* argv[]);
 
     
 
@@ -36,9 +32,10 @@ namespace lbexc
        LBExC instances (i.e. one for which lbexc::Initialize has been called,
        and lbexc::Finalize has not). Otherwise false.
      */
-    [[nodiscard]] bool Initialized ();
+    // [[nodiscard]] bool Initialized ();
 
-
+    // void Finalize (LBExC* pamrex);
+    // void Finalize (); // Finalize the current top
 
 
 
@@ -49,9 +46,24 @@ namespace lbexc
     public:
         LBExC(/* args */);
         ~LBExC();
-        static bool empty () noexcept { return true; }
+        static bool empty () noexcept { return m_instance.empty(); }
+        static int size () noexcept { return static_cast<int>(m_instance.size()); }
+        static LBExC* top () noexcept { return m_instance.back().get(); }
+
+        // Thisfunction will take the ownership of the AMReX pointer,
+        // and put it on the top of the stack (i.e., back of the
+        // vector).  If the pointer is already in the stack, it will
+        // be moved to the top.
+        static void push (LBExC* pamrex);
+
+        // This erases `pamrex` from the stack.
+        static void erase (LBExC* pamrex);
+    private:
+
+        static std::vector<std::unique_ptr<LBExC> > m_instance;
+
+        // Geometry* m_geom = nullptr;
     };
-    
 }
 
 #endif

@@ -22,15 +22,12 @@ $(TARGET): $(OBJECT)
 
 	
 $(OBJDIR)/%.o: $(PRODIR)/%.cpp 
-	-mkdir -p $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $< 
 	@echo "Compiled "\"$<\"" successfully!"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	-mkdir -p $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $< 
 	@echo "Compiled "\"$<\"" successfully!"
-	
 
 MAKE_JOBS_SAFE=yes
 
@@ -43,6 +40,7 @@ allclean:
 	rm -rf $(OBJECT) $(OUTPUT) $(OBJDIR) $(RESTART) $(TARGET)
 run:
 	make allclean
+	mkdir -p $(OBJDIR)
 	make -j6
 	sh run.sh
 continue:
