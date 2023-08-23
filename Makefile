@@ -42,7 +42,7 @@ clean:
 allclean: 
 	rm -rf $(OBJECT) $(OUTPUT) $(OBJDIR) $(RESTART) $(TARGET)
 run:
-	make clean
+	make allclean
 	make -j6
 	sh run.sh
 continue:

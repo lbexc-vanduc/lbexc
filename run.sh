@@ -6,5 +6,5 @@
 #SBATCH --ntasks=1
 export OMP_NUM_THREADS=3
 
-echo "Used nodes:" $SLURM_NODELIST
+# echo "Used nodes:" $SLURM_NODELIST
 mpirun -n 4 ./LBExC

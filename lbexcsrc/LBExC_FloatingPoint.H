@@ -1,5 +1,5 @@
-#ifndef LBExC_INT_H_
-#define LBExC_INT_H_
+#ifndef LBExC_FloatingPoint_H_
+#define LBExC_FloatingPoint_H_
 #include <LBExC_Config.H>
 
 #ifdef __cplusplus
@@ -16,10 +16,14 @@ typedef          long lbexc_long;       // NOLINT(modernize-use-using)
 typedef unsigned long lbexc_ulong;      // NOLINT(modernize-use-using)
 #endif
 
+typedef          double lbexc_double;
+
 #ifdef __cplusplus
 namespace lbexc {
     using Long = lbexc_long;
     using ULong = lbexc_ulong;
+
+    using Real = lbexc_double;
 }
 #endif
 
